@@ -19,8 +19,8 @@ spring:
     encoding: UTF-8
 
   datasource:
-    username: iiva
-    password: iiva
+    username: root
+    password: root
     url: jdbc:mysql://localhost:3306/demo?useSSL=false&serverTimezone=GMT&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
 
@@ -36,6 +36,13 @@ spring:
         min-idle: 0
     timeout: 2000
 
+  data:
+    solr:
+      host: http://localhost:8983/solr/user_core
+com:
+  mysql:
+    jdbc:
+      Driver:
 logging:
   file:
     name: ../log/web/demo-web.log
