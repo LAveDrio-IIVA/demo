@@ -31,14 +31,23 @@ public class TestJwtUtils {
     /**
      * 验证token
      */
+    @Test
     public void verifyToken() {
 
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI0ZWM2NWNhNC0wZjVmLTRlOTktOTI5NS1mYWUyN2UwODIzYzQiLCJpYXQiOjE1NzY0OTI4NjYsImV4cCI6MTU3NjQ5NjQ2NiwiYWRkcmVzcyI6IuWxseS4nOecgemdkuWym-W4guadjuayp-WMuiIsInVzZXJOYW1lIjoi5byg5pmT5piOIiwidXNlcklkIjoxMDAyLCJhZ2UiOjEyfQ.6Z18aIA6y52ntQkV3BwlYiVK3hL3R2WFujjTmuvimww";
+        int result = JwtUtils.verifyToken(token);
+        System.out.println(result);
     }
 
     /**
      * 解析token
      */
+    @Test
     public void parseToken() {
 
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI0ZWM2NWNhNC0wZjVmLTRlOTktOTI5NS1mYWUyN2UwODIzYzQiLCJpYXQiOjE1NzY0OTI4NjYsImV4cCI6MTU3NjQ5NjQ2NiwiYWRkcmVzcyI6IuWxseS4nOecgemdkuWym-W4guadjuayp-WMuiIsInVzZXJOYW1lIjoi5byg5pmT5piOIiwidXNlcklkIjoxMDAyLCJhZ2UiOjEyfQ.6Z18aIA6y52ntQkV3BwlYiVK3hL3R2WFujjTmuvimww";
+
+        Map<String, Object> map = JwtUtils.parseToken(token);
+        System.out.println(map);
     }
 }
