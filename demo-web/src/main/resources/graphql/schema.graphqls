@@ -1,14 +1,79 @@
-type Query {
-    books: [Book!]
+# ROOT
+schema {
+    query: Query
+    mutation: Mutation
 }
 
-type Book {
+# 主查询
+type Query {
+    # 所有类别
+    categories: [Category!]
+    # 根据id查询作者
+    author(id: Int): Author
+    # 根据id查询图书
+    book(id: Int): Book
+    # 根据id集合查询图书
+    booksByIds(ids: [Int!]!): [Book]
+    # 根据类型查询最新广告
+    advertisementsByTypeLatest(type: String!, limit: Int!): [Advertisement]
+}
+
+# 主修改
+type Mutation {
+    # 添加一个作者
+    addAuthor(addAuthorRequest: AddAuthorRequest): String!
+}
+
+# 类别
+type Category {
+    # id
     id: Int!
+    # 名称
     name: String!
+    # 该类图书
+    books: [Book]
+}
+
+# 图书
+type Book {
+    # id
+    id: Int!
+    # 名称
+    name: String!
+    # 作者
     author: Author!
 }
 
+# 作者
 type Author {
+    # id
     id: Int!
+    # 名字
+    name: String!
+    # 名下书籍
+    books: [Book]
+}
+
+# 广告
+    type Advertisement {
+    # id
+    id: Int!
+    # 类型
+    type: String!
+    # 位置
+    place: String!
+    # 图片路径
+    imagePath: String!
+    # 连接地址
+    url: String!
+    # 发布者
+    publisher: String
+    # 发布时间格式化文本
+    publishTimeText: String
+}
+
+# 新增的作者
+input AddAuthorRequest {
+    # 名字
     name: String!
 }
