@@ -16,6 +16,8 @@ type Query {
     booksByIds(ids: [Int!]!): [Book]
     # 根据类型查询最新广告
     advertisementsByTypeLatest(type: String!, limit: Int!): [Advertisement]
+    # 分页查询图书
+    booksByPage(page: Int, size: Int): BooksByPage
 }
 
 # 主修改
@@ -55,7 +57,7 @@ type Author {
 }
 
 # 广告
-    type Advertisement {
+type Advertisement {
     # id
     id: Int!
     # 类型
@@ -76,4 +78,22 @@ type Author {
 input AddAuthorRequest {
     # 名字
     name: String!
+}
+
+# 分页的图书列表
+type BooksByPage {
+    # 图书列表
+    books: [Book]
+    # 分页信息
+    pageInfo: PageInfo
+}
+
+# 分页信息
+type PageInfo {
+    # 总数：
+    total: Int
+    # 页容量：
+    size: Int
+    # 当前页：
+    current: Int
 }

@@ -1,10 +1,9 @@
 package com.iiva.demo.web.graphql.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.iiva.demo.web.graphql.dao.DemoDao;
-import com.iiva.demo.web.graphql.entity.Advertisement;
-import com.iiva.demo.web.graphql.entity.Author;
-import com.iiva.demo.web.graphql.entity.Book;
-import com.iiva.demo.web.graphql.entity.Category;
+import com.iiva.demo.web.graphql.entity.*;
 import com.iiva.demo.web.graphql.request.AddAuthorRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,9 +51,9 @@ public class DemoServiceImpl implements DemoService{
     }
 
     @Override
-    public List<Advertisement> advertisementsByTypeLatest(String type, Integer limit) {
+    public List<Advertisement> getAdvertisementsByTypeLatest(String type, Integer limit) {
 
-        return demoDao.advertisementsByTypeLatest(type,limit);
+        return demoDao.getAdvertisementsByTypeLatest(type,limit);
     }
 
     @Override
@@ -66,6 +65,14 @@ public class DemoServiceImpl implements DemoService{
             return "success";
         }
         return "fail";
+    }
+
+    @Override
+    public IPage<Book> getBooksByPage(Integer page, Integer size) {
+
+        Page<Book> pageBooks = new Page<>(page,size);
+        pageBooks.setRecords(demoDao.getBooksByPage(pageBooks));
+        return pageBooks;
     }
 
     @Autowired

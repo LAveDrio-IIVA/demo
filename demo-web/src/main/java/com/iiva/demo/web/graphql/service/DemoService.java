@@ -1,9 +1,7 @@
 package com.iiva.demo.web.graphql.service;
 
-import com.iiva.demo.web.graphql.entity.Advertisement;
-import com.iiva.demo.web.graphql.entity.Author;
-import com.iiva.demo.web.graphql.entity.Book;
-import com.iiva.demo.web.graphql.entity.Category;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.iiva.demo.web.graphql.entity.*;
 import com.iiva.demo.web.graphql.request.AddAuthorRequest;
 
 import java.util.List;
@@ -22,7 +20,9 @@ public interface DemoService {
 
     List<Book> getBooksByAuthorId(Integer authorId);
 
-    List<Advertisement> advertisementsByTypeLatest(String type, Integer limit);
+    List<Advertisement> getAdvertisementsByTypeLatest(String type, Integer limit);
 
     String addAuthor(AddAuthorRequest addAuthorRequest);
+
+    IPage<Book> getBooksByPage(Integer page, Integer size);
 }

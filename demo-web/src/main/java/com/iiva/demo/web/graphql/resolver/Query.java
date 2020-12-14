@@ -1,10 +1,8 @@
 package com.iiva.demo.web.graphql.resolver;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import com.iiva.demo.web.graphql.entity.Advertisement;
-import com.iiva.demo.web.graphql.entity.Author;
-import com.iiva.demo.web.graphql.entity.Book;
-import com.iiva.demo.web.graphql.entity.Category;
+import com.iiva.demo.web.graphql.entity.*;
 import com.iiva.demo.web.graphql.service.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,9 +32,16 @@ public class Query implements GraphQLQueryResolver {
         return demoService.getBooksByIds(ids);
     }
 
-    public List<Advertisement> advertisementsByTypeLatest(String type,Integer limit){
+    public List<Advertisement> getAdvertisementsByTypeLatest(String type,Integer limit){
 
-        return demoService.advertisementsByTypeLatest(type,limit);
+        return demoService.getAdvertisementsByTypeLatest(type,limit);
+    }
+
+    public BooksByPage getBooksByPage(Integer page,Integer size){
+
+        IPage<Book> iPageBooks = demoService.getBooksByPage(page,size);
+
+        return new BooksByPage(iPageBooks.getRecords(),new PageInfo(iPageBooks.getTotal(),iPageBooks.getSize(),iPageBooks.getCurrent()));
     }
 
     @Autowired
