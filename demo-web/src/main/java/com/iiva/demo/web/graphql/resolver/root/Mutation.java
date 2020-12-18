@@ -1,4 +1,4 @@
-package com.iiva.demo.web.graphql.resolver;
+package com.iiva.demo.web.graphql.resolver.root;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.iiva.demo.web.graphql.request.AddAuthorRequest;

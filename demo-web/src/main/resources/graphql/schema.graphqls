@@ -2,6 +2,7 @@
 schema {
     query: Query
     mutation: Mutation
+    subscription: Subscription
 }
 
 # 主查询
@@ -24,6 +25,12 @@ type Query {
 type Mutation {
     # 添加一个作者
     addAuthor(addAuthorRequest: AddAuthorRequest): String!
+}
+
+# 主订阅
+type Subscription {
+    # 订阅新闻
+    newsRelease: NewsRelease
 }
 
 # 类别
@@ -96,4 +103,12 @@ type PageInfo {
     size: Int
     # 当前页：
     current: Int
+}
+
+# 新闻发布
+type NewsRelease {
+    # 时间
+    time: String
+    # 主题
+    topic: String
 }

@@ -1,4 +1,4 @@
-package com.iiva.demo.web.graphql.resolver;
+package com.iiva.demo.web.graphql.resolver.root;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
