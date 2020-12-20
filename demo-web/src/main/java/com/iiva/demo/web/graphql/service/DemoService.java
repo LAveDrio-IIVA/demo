@@ -3,6 +3,7 @@ package com.iiva.demo.web.graphql.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.iiva.demo.web.graphql.entity.*;
 import com.iiva.demo.web.graphql.request.AddAuthorRequest;
+import com.iiva.demo.web.graphql.request.SendMessageRequest;
 
 import java.util.List;
 
@@ -25,4 +26,6 @@ public interface DemoService {
     String addAuthor(AddAuthorRequest addAuthorRequest);
 
     IPage<Book> getBooksByPage(Integer page, Integer size);
+
+    String sendMessage(SendMessageRequest sendMessageRequest);
 }

@@ -4,10 +4,16 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.iiva.demo.web.graphql.dao.DemoDao;
 import com.iiva.demo.web.graphql.entity.*;
+import com.iiva.demo.web.graphql.event.SendMessageEvent;
 import com.iiva.demo.web.graphql.request.AddAuthorRequest;
+import com.iiva.demo.web.graphql.request.SendMessageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -75,6 +81,23 @@ public class DemoServiceImpl implements DemoService{
         return pageBooks;
     }
 
+    @Override
+    public String sendMessage(SendMessageRequest sendMessageRequest) {
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Message message = new Message(sendMessageRequest.getSender(),sendMessageRequest.getContent(),simpleDateFormat.format(new Date()));
+
+        SendMessageEvent sendMessageEvent = new SendMessageEvent(this,message);
+
+        applicationContext.publishEvent(sendMessageEvent);
+
+        return "success";
+    }
+
     @Autowired
     private DemoDao demoDao;
+
+    @Resource
+    private ApplicationContext applicationContext;
 }

@@ -25,12 +25,19 @@ type Query {
 type Mutation {
     # 添加一个作者
     addAuthor(addAuthorRequest: AddAuthorRequest): String!
+    # 发送一条信息
+    sendMessage(sendMessageRequest: SendMessageRequest): String
 }
+
+
 
 # 主订阅
 type Subscription {
-    # 订阅新闻
-    newsRelease: NewsRelease
+    # 接收新闻
+    receiveNews: News
+
+    # 接收消息
+    receiveMessage: Message
 }
 
 # 类别
@@ -83,6 +90,8 @@ type Advertisement {
 
 # 新增的作者
 input AddAuthorRequest {
+    # id
+    id: Int
     # 名字
     name: String!
 }
@@ -106,9 +115,30 @@ type PageInfo {
 }
 
 # 新闻发布
-type NewsRelease {
+type News {
+    # id
+    id: String
     # 时间
     time: String
     # 主题
     topic: String
+}
+
+# 发送信息
+input SendMessageRequest {
+    # 发送者
+    sender: String
+    # 内容
+    content: String
+
+}
+
+# 消息
+type Message {
+    # 发送者
+    sender: String
+    # 内容
+    content: String
+    # 时间
+    time: String
 }

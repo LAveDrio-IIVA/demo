@@ -7,5 +7,7 @@ import java.io.Serializable;
 @Data
 public class AddAuthorRequest implements Serializable {
 
+    private Integer id;
+
     private String name;
 }

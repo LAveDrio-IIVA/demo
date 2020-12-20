@@ -62,6 +62,13 @@
             <version>${mybatisplus.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjava -->
+        <dependency>
+            <groupId>io.reactivex.rxjava2</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>2.2.20</version>
+        </dependency>
+
         <!-- GraphQL -->
         <!-- https://mvnrepository.com/artifact/com.graphql-java-kickstart/graphql-java-tools -->
         <dependency>
