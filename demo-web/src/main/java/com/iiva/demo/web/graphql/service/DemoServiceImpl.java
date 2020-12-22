@@ -95,6 +95,30 @@ public class DemoServiceImpl implements DemoService{
         return "success";
     }
 
+    @Override
+    public List<School> getAllSchools() {
+
+        return demoDao.getAllSchools();
+    }
+
+    @Override
+    public List<Teacher> getTeachersBySchoolId(Integer schoolId) {
+
+        return demoDao.getTeachersBySchoolId(schoolId);
+    }
+
+    @Override
+    public List<Teacher> getTeachersBySchoolIds(List<Integer> schoolIds) {
+
+        return demoDao.getTeachersBySchoolIds(schoolIds);
+    }
+
+    @Override
+    public List<Integer> getSchoolIds() {
+
+        return demoDao.getSchoolIds();
+    }
+
     @Autowired
     private DemoDao demoDao;
 

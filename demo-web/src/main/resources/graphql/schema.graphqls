@@ -19,6 +19,8 @@ type Query {
     advertisementsByTypeLatest(type: String!, limit: Int!): [Advertisement]
     # 分页查询图书
     booksByPage(page: Int, size: Int): BooksByPage
+    # 查询所有学校
+    schools: [School!]
 }
 
 # 主修改
@@ -29,13 +31,10 @@ type Mutation {
     sendMessage(sendMessageRequest: SendMessageRequest): String
 }
 
-
-
 # 主订阅
 type Subscription {
     # 接收新闻
     receiveNews: News
-
     # 接收消息
     receiveMessage: Message
 }
@@ -130,7 +129,6 @@ input SendMessageRequest {
     sender: String
     # 内容
     content: String
-
 }
 
 # 消息
@@ -141,4 +139,22 @@ type Message {
     content: String
     # 时间
     time: String
+}
+
+# 学校
+type School {
+    # id
+    id: Int
+    # 名字
+    name: String
+    # 老师
+    teachers: [Teacher]
+}
+
+# 学校
+type Teacher {
+    # id
+    id: Int
+    # 名字
+    name: String
 }

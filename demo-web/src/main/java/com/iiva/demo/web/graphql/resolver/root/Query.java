@@ -2,8 +2,10 @@ package com.iiva.demo.web.graphql.resolver.root;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import com.iiva.demo.web.graphql.dataLoader.TeacherDataLoader;
 import com.iiva.demo.web.graphql.entity.*;
 import com.iiva.demo.web.graphql.service.DemoService;
+import org.dataloader.DataLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -44,7 +46,15 @@ public class Query implements GraphQLQueryResolver {
         return new BooksByPage(iPageBooks.getRecords(),new PageInfo(iPageBooks.getTotal(),iPageBooks.getSize(),iPageBooks.getCurrent()));
     }
 
+    public List<School> schools() {
+
+        return demoService.getAllSchools();
+    }
+
     @Autowired
     private DemoService demoService;
+
+    @Autowired
+    private TeacherDataLoader teacherDataLoader;
 
 }

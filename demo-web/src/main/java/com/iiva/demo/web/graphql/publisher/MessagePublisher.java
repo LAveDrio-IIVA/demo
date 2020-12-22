@@ -5,6 +5,7 @@ import com.iiva.demo.web.graphql.event.SendMessageEvent;
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.observables.ConnectableObservable;
 import lombok.Data;
 import org.springframework.context.event.EventListener;
@@ -20,18 +21,9 @@ public class MessagePublisher {
     public MessagePublisher() {
 
         Observable<Message> messageUpdateObservable = Observable.create(
-                emitter -> {
+            emitter -> {
 
-                    MessageEventListener messageEventListener = new MessageEventListener(){
-
-                        @EventListener
-                        public void messageEvent(SendMessageEvent sendMessageEvent) {
-
-                            System.out.println(sendMessageEvent.getMessage());
-                            emitter.onNext(sendMessageEvent.getMessage());
-                        }
-                    };
-                }
+            }
         );
 
         ConnectableObservable<Message> connectableObservable = messageUpdateObservable
@@ -40,10 +32,5 @@ public class MessagePublisher {
 
         publisher = connectableObservable.toFlowable(BackpressureStrategy.BUFFER);
     }
-
-}
-
-@Component
-class MessageEventListener {
 
 }

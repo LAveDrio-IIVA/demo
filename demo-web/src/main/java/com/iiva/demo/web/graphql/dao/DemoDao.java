@@ -1,10 +1,7 @@
 package com.iiva.demo.web.graphql.dao;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.iiva.demo.web.graphql.entity.Advertisement;
-import com.iiva.demo.web.graphql.entity.Author;
-import com.iiva.demo.web.graphql.entity.Book;
-import com.iiva.demo.web.graphql.entity.Category;
+import com.iiva.demo.web.graphql.entity.*;
 import com.iiva.demo.web.graphql.request.AddAuthorRequest;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -47,4 +44,21 @@ public interface DemoDao {
 
     @Select("select * from book")
     List<Book> getBooksByPage(Page<Book> pageBooks);
+
+    @Select("select * from school")
+    List<School> getAllSchools();
+
+    @Select("select * from teacher where school_id = #{schoolId}")
+    List<Teacher> getTeachersBySchoolId(Integer schoolId);
+
+    @Select("<script>"
+            + "select * from teacher where school_id in "
+            + "<foreach item='item' index='index' collection='schoolIds' open='(' separator=',' close=')'>"
+            + "#{item}"
+            + "</foreach>"
+            + "</script>")
+    List<Teacher> getTeachersBySchoolIds(List<Integer> schoolIds);
+
+    @Select("select id from school")
+    List<Integer> getSchoolIds();
 }

@@ -28,4 +28,13 @@ public interface DemoService {
     IPage<Book> getBooksByPage(Integer page, Integer size);
 
     String sendMessage(SendMessageRequest sendMessageRequest);
+
+    List<School> getAllSchools();
+
+    List<Teacher> getTeachersBySchoolId(Integer schoolId);
+
+    List<Teacher> getTeachersBySchoolIds(List<Integer> schoolIds);
+
+    List<Integer> getSchoolIds();
+
 }
