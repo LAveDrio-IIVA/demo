@@ -1,4 +1,4 @@
-package com.iiva.demo.web.graphql.config;
+package com.iiva.demo.web.graphql.constant;
 
 public class DemoConstant {
 

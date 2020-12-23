@@ -26,7 +26,11 @@ public class NewsPublisher {
 
     private final Flowable<News> publisher;
 
+    private final EncodedResource encodedResource;
+
     public NewsPublisher() {
+        encodedResource = new EncodedResource(new ClassPathResource("dic/newsTopic.properties"), Charsets.UTF_8);
+
         Observable<News> newsUpdateObservable = Observable.create(
                 emitter -> {
 
@@ -62,8 +66,6 @@ public class NewsPublisher {
         String value = null;
 
         try {
-
-            EncodedResource encodedResource = new EncodedResource(new ClassPathResource("dic/newsTopic.properties"), Charsets.UTF_8);
             prop = PropertiesLoaderUtils.loadProperties(encodedResource);
 
             int lineNum = (int)(Math.random()*100);
