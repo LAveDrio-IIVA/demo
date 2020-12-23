@@ -16,21 +16,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessagePublisher {
 
-    private final Flowable<Message> publisher;
-
-    public MessagePublisher() {
-
-        Observable<Message> messageUpdateObservable = Observable.create(
-            emitter -> {
-
-            }
-        );
-
-        ConnectableObservable<Message> connectableObservable = messageUpdateObservable
-                .share().publish();
-        connectableObservable.connect();
-
-        publisher = connectableObservable.toFlowable(BackpressureStrategy.BUFFER);
-    }
+//    private final Flowable<Message> publisher;
+//
+//    public MessagePublisher() {
+//
+//        Observable<Message> messageUpdateObservable = Observable.create(
+//            emitter -> {
+//
+//            }
+//        );
+//
+//        ConnectableObservable<Message> connectableObservable = messageUpdateObservable
+//                .share().publish();
+//        connectableObservable.connect();
+//
+//        publisher = connectableObservable.toFlowable(BackpressureStrategy.BUFFER);
+//    }
 
 }

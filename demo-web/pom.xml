@@ -85,6 +85,7 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.graphql-java-kickstart/graphiql-spring-boot-starter -->
+        <!-- Note: The graphiql has a bug when using subscription(websocket).Using Altair client is a better choise!-->
         <dependency>
             <groupId>com.graphql-java-kickstart</groupId>
             <artifactId>graphiql-spring-boot-starter</artifactId>

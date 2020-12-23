@@ -17,21 +17,21 @@ public class Subscription implements GraphQLSubscriptionResolver {
         return newsPublisher.getPublisher();
     }
 
-    public Publisher<Message> receiveMessage() {
-
-        return messagePublisher.getPublisher();
-    }
+//    public Publisher<Message> receiveMessage() {
+//
+//        return messagePublisher.getPublisher();
+//    }
 
     @Autowired
     private NewsPublisher newsPublisher;
 
-    @Autowired
-    private MessagePublisher messagePublisher;
+//    @Autowired
+//    private MessagePublisher messagePublisher;
 
     Subscription(NewsPublisher newsPublisher){
 
         this.newsPublisher = newsPublisher;
-        this.messagePublisher = messagePublisher;
+//        this.messagePublisher = messagePublisher;
     }
 
 }

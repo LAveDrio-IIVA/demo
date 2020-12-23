@@ -1,0 +1,21 @@
+query {
+  book(id: 3) {
+    id
+    name
+    author {
+      name
+      books {
+        name
+      }
+    }
+  }
+
+  advertisementsByTypeLatest(type: "PC", limit: 2) {
+    type
+    place
+    imagePath
+    url
+    publisher
+    publishTimeText
+  }
+}

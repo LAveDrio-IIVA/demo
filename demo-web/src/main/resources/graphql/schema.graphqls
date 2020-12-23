@@ -36,7 +36,7 @@ type Subscription {
     # 接收新闻
     receiveNews: News
     # 接收消息
-    receiveMessage: Message
+#    receiveMessage: Message
 }
 
 # 类别
@@ -131,15 +131,15 @@ input SendMessageRequest {
     content: String
 }
 
-# 消息
-type Message {
-    # 发送者
-    sender: String
-    # 内容
-    content: String
-    # 时间
-    time: String
-}
+## 消息
+#type Message {
+#    # 发送者
+#    sender: String
+#    # 内容
+#    content: String
+#    # 时间
+#    time: String
+#}
 
 # 学校
 type School {
