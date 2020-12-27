@@ -3,12 +3,10 @@ package com.iiva.demo.web.graphql.dao;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.iiva.demo.web.graphql.entity.*;
 import com.iiva.demo.web.graphql.request.AddAuthorRequest;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface DemoDao {
@@ -45,7 +43,7 @@ public interface DemoDao {
     @Select("select * from book")
     List<Book> getBooksByPage(Page<Book> pageBooks);
 
-    @Select("select * from school")
+    @Select("select * from school order by id")
     List<School> getAllSchools();
 
     @Select("select * from teacher where school_id = #{schoolId}")
@@ -56,8 +54,9 @@ public interface DemoDao {
             + "<foreach item='item' index='index' collection='schoolIds' open='(' separator=',' close=')'>"
             + "#{item}"
             + "</foreach>"
+            + " order by school_id"
             + "</script>")
-    List<Teacher> getTeachersBySchoolIds(List<Integer> schoolIds);
+    List<Teacher> getTeachersBySchoolIds(@Param("schoolIds")List<Integer> schoolIds);
 
     @Select("select id from school")
     List<Integer> getSchoolIds();

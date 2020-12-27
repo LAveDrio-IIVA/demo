@@ -33,7 +33,7 @@ public interface DemoService {
 
     List<Teacher> getTeachersBySchoolId(Integer schoolId);
 
-    List<Teacher> getTeachersBySchoolIds(List<Integer> schoolIds);
+    List<List<Teacher>> getTeachersBySchoolIds(List<Integer> schoolIds);
 
     List<Integer> getSchoolIds();
 

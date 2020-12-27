@@ -7,14 +7,17 @@ import com.iiva.demo.web.graphql.entity.*;
 import com.iiva.demo.web.graphql.event.SendMessageEvent;
 import com.iiva.demo.web.graphql.request.AddAuthorRequest;
 import com.iiva.demo.web.graphql.request.SendMessageRequest;
+import com.iiva.demo.web.graphql.support.DemoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DemoServiceImpl implements DemoService{
@@ -108,9 +111,11 @@ public class DemoServiceImpl implements DemoService{
     }
 
     @Override
-    public List<Teacher> getTeachersBySchoolIds(List<Integer> schoolIds) {
+    public List<List<Teacher>> getTeachersBySchoolIds(List<Integer> schoolIds) {
 
-        return demoDao.getTeachersBySchoolIds(schoolIds);
+        List<Teacher> teachers = demoDao.getTeachersBySchoolIds(schoolIds);
+
+        return demoSupport.combineTeachersBySchoolId(teachers);
     }
 
     @Override
@@ -124,4 +129,8 @@ public class DemoServiceImpl implements DemoService{
 
     @Resource
     private ApplicationContext applicationContext;
+
+    @Autowired
+    private DemoSupport demoSupport;
+
 }
