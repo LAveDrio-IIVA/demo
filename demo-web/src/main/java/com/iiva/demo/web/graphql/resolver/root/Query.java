@@ -8,13 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Component
 public class Query implements GraphQLQueryResolver {
 
-    public List<Category> categories() {
+    public CompletableFuture<List<Category>> categories() {
 
-        return demoService.getAllCategories();
+        return CompletableFuture.supplyAsync(() ->
+                demoService.getAllCategories());
     }
 
     public Book book(Integer id) {
@@ -32,9 +34,10 @@ public class Query implements GraphQLQueryResolver {
         return demoService.getBooksByIds(ids);
     }
 
-    public List<Advertisement> getAdvertisementsByTypeLatest(String type,Integer limit){
+    public CompletableFuture<List<Advertisement>> getAdvertisementsByTypeLatest(String type,Integer limit){
 
-        return demoService.getAdvertisementsByTypeLatest(type,limit);
+        return CompletableFuture.supplyAsync(() ->
+                demoService.getAdvertisementsByTypeLatest(type,limit));
     }
 
     public BooksByPage getBooksByPage(Integer page,Integer size){
