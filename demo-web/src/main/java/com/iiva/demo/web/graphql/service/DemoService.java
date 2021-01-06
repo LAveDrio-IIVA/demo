@@ -6,6 +6,8 @@ import com.iiva.demo.web.graphql.request.AddAuthorRequest;
 import com.iiva.demo.web.graphql.request.SendMessageRequest;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public interface DemoService {
 
@@ -33,7 +35,7 @@ public interface DemoService {
 
     List<Teacher> getTeachersBySchoolId(Integer schoolId);
 
-    List<List<Teacher>> getTeachersBySchoolIds(List<Integer> schoolIds);
+    Map<Integer, List<Teacher>> getTeachersBySchoolIds(Set<Integer> schoolIds);
 
     List<Integer> getSchoolIds();
 

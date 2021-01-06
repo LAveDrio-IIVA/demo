@@ -14,10 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class DemoServiceImpl implements DemoService{
@@ -111,11 +108,24 @@ public class DemoServiceImpl implements DemoService{
     }
 
     @Override
-    public List<List<Teacher>> getTeachersBySchoolIds(List<Integer> schoolIds) {
+    public Map<Integer, List<Teacher>> getTeachersBySchoolIds(Set<Integer> schoolIds) {
 
         List<Teacher> teachers = demoDao.getTeachersBySchoolIds(schoolIds);
+        Map<Integer, List<Teacher>> teachersMap = new HashMap<>();
 
-        return demoSupport.combineTeachersBySchoolId(teachers);
+        // 将teachers以Map<schoolIds,List<teacher>>的形式整合起来，便于dataloader的父子关联~
+        for (Teacher teacher:teachers) {
+
+            if(teachersMap.get(teacher.getSchoolId()) == null){
+
+                List<Teacher> ts = new ArrayList<>();
+                ts.add(teacher);
+                teachersMap.put(teacher.getSchoolId(),ts);
+                continue;
+            }
+            teachersMap.get(teacher.getSchoolId()).add(teacher);
+        }
+        return teachersMap;
     }
 
     @Override

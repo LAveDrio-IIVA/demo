@@ -6,7 +6,7 @@ import com.iiva.demo.web.graphql.request.AddAuthorRequest;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 @Mapper
 public interface DemoDao {
@@ -43,7 +43,7 @@ public interface DemoDao {
     @Select("select * from book")
     List<Book> getBooksByPage(Page<Book> pageBooks);
 
-    @Select("select * from school order by id")
+    @Select("select * from school")
     List<School> getAllSchools();
 
     @Select("select * from teacher where school_id = #{schoolId}")
@@ -54,9 +54,8 @@ public interface DemoDao {
             + "<foreach item='item' index='index' collection='schoolIds' open='(' separator=',' close=')'>"
             + "#{item}"
             + "</foreach>"
-            + " order by school_id"
             + "</script>")
-    List<Teacher> getTeachersBySchoolIds(@Param("schoolIds")List<Integer> schoolIds);
+    List<Teacher> getTeachersBySchoolIds(@Param("schoolIds") Set<Integer> schoolIds);
 
     @Select("select id from school")
     List<Integer> getSchoolIds();

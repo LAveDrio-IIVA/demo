@@ -13,6 +13,7 @@ import javax.websocket.server.HandshakeRequest;
 import graphql.servlet.context.*;
 import org.dataloader.DataLoader;
 import org.dataloader.DataLoaderRegistry;
+import org.dataloader.MappedBatchLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -41,11 +42,14 @@ public class SchoolGraphQLContextBuilder implements GraphQLContextBuilder {
   }
 
   private DataLoaderRegistry buildDataLoaderRegistry() {
+
+    // 一种通过Map<k,v>的映射实现的父子对象的dataloader关联，并非默认的List序列的方式实现的（见：java-dataloader官方github说明）
+    // 但实际生产项目逻辑更复杂，需要完备测试~
+    MappedBatchLoader<Integer, List<Teacher>> teacherMapBatchLoader = schoolIds -> CompletableFuture.supplyAsync(() -> demoService.getTeachersBySchoolIds(schoolIds));
+
     DataLoaderRegistry dataLoaderRegistry = new DataLoaderRegistry();
     dataLoaderRegistry.register("teacherDataLoader",
-        new DataLoader<Integer, List<Teacher>>(schoolIds ->
-            CompletableFuture.supplyAsync(() ->
-                    demoService.getTeachersBySchoolIds(schoolIds))));
+            DataLoader.newMappedDataLoader(teacherMapBatchLoader));
     return dataLoaderRegistry;
   }
 
